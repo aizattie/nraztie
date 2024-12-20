@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nraztie's Biodata</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: "Lucida Console", "Courier New", monospace;
+            background: url('image/image 19.gif') no-repeat center center/cover;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+         /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .logo:hover {
+            color: #E4A592;
+        }
+
+        /* Burger Menu */
+        .burger-menu {
+            display: block;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .burger-menu span {
+            background-color: #E4A592;
+            display: block;
+            height: 3px;
+            width: 25px;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu.open span:nth-child(1) {
+            transform: rotate(45deg) translateY(8px);
+        }
+
+        .burger-menu.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.open span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-8px);
+        }
+
+        /* Side Navigation */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            width: 250px;
+            background-color: #EFC6CD;
+            color: white;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            padding-top: 60px;
+        }
+
+        .side-nav a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .side-nav a:hover {
+            background-color: #CBD6AB;
+        }
+		
+		.section {
+            padding: 50px 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+		
+        .tabs, .accordion, .skills, .gallery, .resume {
+            margin-top: 20px;
+            background: #EFC6CD;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+		
+		.tabs {
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #EFC6CD;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tabs .tab-header {
+            display: flex;
+            background-color: #694F38;
+        }
+
+        .tabs .tab-header button {
+            flex: 1;
+            padding: 10px 15px;
+            cursor: pointer;
+            background: #CBD6AB;
+            color: white;
+            border: none;
+            outline: none;
+            transition: background 0.3s;
+        }
+
+        .tabs .tab-header button.active {
+            background-color:  #EFC6CD;
+            color: #694F38;
+        }
+
+        .tabs .tab-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .tabs .tab-content.active {
+            display: block;
+        }
+		
+		
+        /* Hero Section Styles */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0 10%;
+            background-color: #EFC6CD;
+            color: black;
+            text-align: left;
+        }
+
+        .hero .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .hero .content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hero .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .hero .image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero .image img {
+            width: 100%;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .hero .image img.active {
+            display: block;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .carousel-buttons button {
+            pointer-events: all;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero {
+                flex-direction: column;
+            }
+        }
+		
+		
+		/* Progress Bars */
+        .progress-bar {
+            margin: 10px 0;
+        }
+
+        .progress-bar span {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .progress {
+            background: #ddd;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress div {
+            height: 100%;
+            background-color: #CBD6AB;
+            width: 0%;
+            animation: fill 2s forwards;
+        }
+
+        @keyframes fill {
+            from { width: 0%; }
+            to { width: var(--progress); }
+        }
+        
+		/* Interests Section Styles */
+		.interests {
+			padding: 50px 20px;
+			max-width: 800px;
+			margin: 20px auto;
+			background: #EFC6CD;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.interests h2 {
+			text-align: center;
+			margin-bottom: 20px;
+			font-size: 24px;
+			color: #694F38;
+		}
+
+		.interests ul {
+			list-style: none;
+			padding: 0;
+			font-size: 18px;
+			color: #333;
+		}
+
+		.interests ul li {
+			padding: 10px 0;
+			border-bottom: 1px solid #CBD6AB;
+		}
+
+		.interests ul li:last-child {
+			border-bottom: none;
+		}
+
+		.interests ul li span {
+			font-weight: bold;
+			color: #694F38;
+		}
+		
+        /* Resume Section Styles */
+		.resume-section {
+			margin-top: 20px;
+			border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			text-align: center;
+		}
+
+		.resume-section h2 {
+			margin-bottom: 20px;
+		}
+
+		.resume-button {
+			display: inline-block;
+			padding: 15px 30px;
+			font-size: 18px;
+			color: white;
+			background-color: #EFC6CD;
+			text-decoration: none;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			transition: background-color 0.3s, transform 0.3s;
+		}
+
+		.resume-button:hover {
+			background-color: #CBD6AB;
+			transform: scale(1.1);
+		} 
+ 
+		
+		/* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #CBD6AB;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.5s ease, transform 0.3s ease;
+        }
+        #back-to-top.show {
+            display: block;
+            opacity: 1;
+        }
+        #back-to-top:hover {
+            transform: scale(1.2);
+        }
+        
+		
+        /* Footer Styles */
+        footer {
+            background-color: #CBD6AB ;
+            color: black;
+            text-align: center;
+            padding: 10px 10px;
+			
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #D0BCA1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+   <header>
+        <div class="navbar">
+            <div class="logo">NRAZTIE</div>
+            <div class="burger-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="side-nav" id="sideNav">
+	    <a href="index.html">Home</a>
+                <a href="biodata.html">Biodata</a>
+				<a href="experience.html">Experience</a>
+                <a href="education.html">Education</a>
+                <a href="family.html">Family</a>
+                <a href="gallery.html">Gallery</a>
+    </div>
+	
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="content">
+            <h1>Hi!</h1>
+            <p>Welcome to my biodata page. I am 20 years old, and this is a glimpse of my journey, interests, and cherished memories.</p>
+        </div>
+        <div class="image">
+            <img src="image/image 7.jpg" alt="Aizattie 1" class="active">
+            <img src="image/image 8.jpg" alt="Aizattie 2">
+            <img src="image/image 10.jpg" alt="Aizattie 3">
+            <div class="carousel-buttons">
+                <button onclick="changeSlide(-1)">&#10094;</button>
+                <button onclick="changeSlide(1)">&#10095;</button>
+            </div>
+        </div>
+    </section>
+	
+	 <!-- Tabs Section -->
+    <section class="tabs" id="tabs">
+        <div class="tab-header">
+		    
+            <button class="active" onclick="openTab(event, 'name')">Name</button>
+			<button onclick="openTab(event, 'birthday')">Birthday</button>
+            <button onclick="openTab(event, 'address')">Address</button>
+			<button onclick="openTab(event, 'phone')">Number Phone</button>
+			<button onclick="openTab(event, 'email')">E-mail</button>
+            <button onclick="openTab(event, 'fact')">Fun Facts</button>
+        </div>
+		<div class="tab-content active" id="name">
+            <h2>Name</h2>
+            <p>Nur Aizattie Binti Awang</p>
+        </div>
+        <div class="tab-content active" id="birthday">
+            <h2>Birthday</h2>
+            <p>5 July 2004 at Pusat Rawatan Keluarga Muip Kuantan</p>
+        </div>
+        <div class="tab-content" id="address">
+            <h2>Address</h2>
+            <p>NO. 17, Lorong Bukit Setongkol 48, Taman Cenderawasih Indah 25200, Kuantan, Pahang Darul Makmur</p>
+        </div>
+		<div class="tab-content active" id="phone">
+            <h2>Number Phone</h2>
+            <p><a href="http://www.wasap.my/60136308724/pm">
+            <img src="image/whatsapp.jpg" height="100" weight="100" border="2px" align="center">
+            </a></p>
+
+        </div>
+        <div class="tab-content active" id="email">
+            <h2>E-mail</h2>
+            <p>aizattie0705@gmail.com</p>
+        </div>
+        <div class="tab-content" id="fact">
+            <h2>Fun facts</h2>
+            <p>My MBTI is ISTJ</p>
+			<p>Get to know your MBTI by clicking this image</p>
+			<p><a href="https://www.16personalities.com/free-personality-test">
+            <img src="image/test.jpg" height="100" weight="100" border="2px" align="center">
+            </a></p>
+        </div>
+    </section>
+	
+
+	
+	<!-- Skills with Progress Bars -->
+    <section class="section skills" id="skills">
+        <h2>Skills</h2>
+        <div class="progress-bar">
+            <span>Communication</span>
+            <div class="progress" style="--progress: 85%;">
+                <div></div>
+            </div>
+        </div>
+        <div class="progress-bar">
+            <span>Creativity</span>
+            <div class="progress" style="--progress: 75%;">
+                <div></div>
+            </div>
+        </div>
+        <div class="progress-bar">
+            <span>Teamwork</span>
+            <div class="progress" style="--progress: 90%;">
+                <div></div>
+            </div>
+        </div>
+    </section>
+        
+		<!-- Interests Section -->
+		<section class="interests" id="interests">
+			<h2>My Interests</h2>
+			<ul>
+				<li><span>📚 Reading:</span> Reading romance and fictional novels.</li>
+				<li><span>📺 Drama:</span> My favourite genre are thriller and romantic comedy.</li>
+				<li><span>🎮 Gaming:</span> Enjoying step into an interactive sci-fi world.</li>
+				<li><span>🎧 Music:</span> Listening to a mix of pop and R&B music.</li>
+				<li><span>🐱 Cats:</span> My favourite animal.</li>
+			</ul>
+		</section>
+
+	
+	 <!-- Resume Section -->
+	<section class="resume-section" id="resume">
+		<h2>Resume</h2>
+		<a class="resume-button" href="resume.pdf" target="_blank">View My Resume</a>
+	</section>
+	
+	
+	<!-- Back to Top Button -->
+    <button id="back-to-top" title="Go to top">⬆</button>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Aizattie's Website. All rights reserved.</p>
+        <p>Follow me on <a href="https://www.instagram.com/nr.aztie/profilecard/?igsh=MWU0MXRhaDJlNXRvZg==" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>
+    </footer>
+
+    <script>
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+	
+	<script>
+	// JavaScript for toggling the side navigation
+        function toggleMenu() {
+            const sideNav = document.getElementById("sideNav");
+            const burgerMenu = document.querySelector(".burger-menu");
+
+            if (sideNav.style.left === "0px") {
+                sideNav.style.left = "-250px";
+                burgerMenu.classList.remove("open");
+            } else {
+                sideNav.style.left = "0px";
+                burgerMenu.classList.add("open");
+            }
+        }
+	</script>
+
+    <!-- JavaScript for Carousel -->
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".hero .image img");
+
+        function changeSlide(direction) {
+            slides[currentIndex].classList.remove("active");
+            currentIndex = (currentIndex + direction + slides.length) % slides.length;
+            slides[currentIndex].classList.add("active");
+        }
+		
+		function openTab(event, tabId) {
+            const tabs = document.querySelectorAll(".tab-content");
+            const buttons = document.querySelectorAll(".tab-header button");
+            tabs.forEach(tab => tab.classList.remove("active"));
+            buttons.forEach(btn => btn.classList.remove("active"));
+            document.getElementById(tabId).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+
+    </script>
+</body>
+</html>
