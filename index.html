@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NRAZTIE</title>
+    <style>
+        * General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #CBD6AB;
+            scroll-behavior: smooth;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+         /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .logo:hover {
+            color: #E4A592;
+        }
+
+        /* Burger Menu */
+        .burger-menu {
+            display: block;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .burger-menu span {
+            background-color: #E4A592;
+            display: block;
+            height: 3px;
+            width: 25px;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu.open span:nth-child(1) {
+            transform: rotate(45deg) translateY(8px);
+        }
+
+        .burger-menu.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.open span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-8px);
+        }
+
+        /* Side Navigation */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            width: 250px;
+            background-color: #EFC6CD;
+            color: white;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            z-index: 999;
+        }
+
+        .side-nav a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .side-nav a:hover {
+            background-color: #CBD6AB;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: url('image/image 13.jpg') no-repeat center center/cover;
+            height: 100vh;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding-left: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            background-color: #E4A592;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #CBD6AB;
+        }
+
+        /* Adjustments for Hero Section when Side Nav is Open */
+        .hero.open {
+            margin-left: 250px; /* Move the hero section when side nav is open */
+        }
+		
+		
+		 .card-table-container {
+            display: flex;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 50px;
+            background: #EFC6CD;
+            position: relative;
+        }
+
+        .card-track {
+            display: flex;
+            animation: scrollCards 20s linear infinite;
+        }
+
+        @keyframes scrollCards {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .card {
+            background-color: #FFF6EF;
+            color: black;
+            width: 200px;
+            padding: 20px;
+            margin: 0 10px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 1rem;
+        }
+        
+		.card img {
+			width: 100%;
+			height: auto;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+       
+		
+		/* Services Section Styles */
+			.services-section {
+			background-color: #EFC6CD;
+			color: #333;
+			text-align: center;
+			padding: 50px 20px;
+		}
+
+		.services-section h2 {
+			font-size: 2.5rem;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+		.services-section p {
+			font-size: 1.1rem;
+			color: #666;
+			margin-bottom: 40px;
+		}
+
+		.services-container {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 20px;
+		}
+
+		.services-card {
+			background-color: #FFF6EF;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			width: 200px;
+			text-align: center;
+			transition: transform 0.3s ease;
+		}
+
+		.services-card:hover {
+			transform: translateY(-10px);
+		}
+
+		.services-icon {
+			width: 60px;
+			margin-bottom: 10px;
+		}
+
+		.services-card h3 {
+			font-size: 1.3rem;
+			margin-bottom: 10px;
+		}
+
+		.services-card p {
+			font-size: 0.9rem;
+			color: black;
+		}
+		
+		.signup-section {
+			background: url('image/image 13.jpg') no-repeat center center/cover;
+			text-align: center;
+			padding: 50px 20px;
+			color: black;
+		}
+
+		.signup-section h2 {
+			font-size: 24px;
+			margin-bottom: 20px;
+		}
+
+		.signup-form {
+			display: inline-flex;
+			margin-bottom: 20px;
+		}
+
+		.signup-form input[type="email"] {
+			padding: 10px 15px;
+			border: none;
+			border-radius: 5px 0 0 5px;
+			outline: none;
+			width: 300px;
+		}	
+
+		.signup-form button {
+			padding: 10px 15px;
+			border: none;
+			border-radius: 0 5px 5px 0;
+			background-color: #333;
+			color: white;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		.signup-form button:hover {
+			background-color: #555;
+		}
+
+		.signup-section p {
+			font-size: 14px;
+			margin: 0;
+		}
+
+		.signup-section p a {
+			color: black;
+			text-decoration: underline;
+		}
+
+		.signup-section p a:hover {
+			color: #ddd;
+		}
+        
+		
+		
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #CBD6AB;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.5s ease, transform 0.3s ease;
+        }
+        #back-to-top.show {
+            display: block;
+            opacity: 1;
+        }
+        #back-to-top:hover {
+            transform: scale(1.2);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #CBD6AB ;
+            color: black;
+            text-align: center;
+            padding: 10px 10px;
+			
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #D0BCA1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">NRAZTIE</div>
+            <div class="burger-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="side-nav" id="sideNav">
+	    <a href="index.html">Home</a>
+                <a href="biodata.html">Biodata</a>
+				<a href="experience.html">Experience</a>
+                <a href="education.html">Education</a>
+                <a href="family.html">Family</a>
+                <a href="gallery.html">Gallery</a>
+    </div>
+	
+    
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h2>Hello, I'm Aizattie</h2>
+        <p>Explore my life journey and skills.</p>
+        <a href="#content" class="btn">Get Started</a>
+    </div>
+    
+	
+    
+	
+	<!-- Services Section -->
+		<section class="services-section">
+			<h2>Discover More</h2>
+			<p>Here are what I offer.</p>
+		<div class="services-container">
+        <div class="services-card">
+            <img src="image/image 53.jpg" alt="Biodata" class="services-icon">
+            <h3>Biodata</h3>
+            <p>Get to know about my basic information.</p>
+        </div>
+        <div class="services-card">
+            <img src="image/image 54.jpg" alt="Experience" class="services-icon">
+            <h3>Experience</h3>
+            <p>Exploring into any experience throughout my university days.</p>
+        </div>
+        <div class="services-card">
+            <img src="image/image 55.jpg" alt="Education" class="services-icon">
+            <h3>Education</h3>
+            <p>Exploring my education journey.</p>
+        </div>
+        <div class="services-card">
+            <img src="image/image 56.jpg" alt="Family" class="services-icon">
+            <h3>Family</h3>
+            <p>Get to know my family members</p>
+        </div>
+		<div class="services-card">
+            <img src="image/image 57.jpg" alt="Gallery" class="services-icon">
+            <h3>Gallery</h3>
+            <p>Explore my journey of memories.</p>
+        </div>
+</section>
+
+
+    <div class="card-table-container">
+    <div class="card-track">
+        <div class="card">
+            <img src="image/image 48.jpg" alt="Card 1 Image" />
+        </div>
+        <div class="card">
+            <img src="image/image 49.jpg" alt="Card 2 Image" />
+        </div>
+        <div class="card">
+            <img src="image/image 50.jpg" alt="Card 3 Image" />
+        </div>
+        <div class="card">
+            <img src="image/image 51.jpg" alt="Card 4 Image" />
+        </div>
+        <div class="card">
+            <img src="image/image 52.jpg" alt="Card 5 Image" />
+        </div>
+        <!-- Duplicate cards for seamless scrolling -->
+        <div class="card">
+            <img src="image/image 48.jpg" alt="Card 1 Image" />
+        </div>
+        <div class="card">
+            <img src="image/image 49.jpg" alt="Card 2 Image" />
+        </div>
+        <div class="card">
+            <img src="image/image 50.jpg" alt="Card 3 Image" />
+        </div>
+        <div class="card">
+            <img src="image/image 51.jpg" alt="Card 4 Image" />
+        </div>
+        <div class="card">
+            <img src="image/image 52.jpg" alt="Card 5 Image" />
+        </div>
+    </div>
+</div>
+
+    
+	<section class="signup-section">
+        <div class="content">
+            <h2>Let's be Friend!</h2>
+            <form class="signup-form">
+                <input type="email" placeholder="Email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <p>Subscribe to receive new updates.</p> 
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Go to top">⬆</button>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Aizattie's Website. All rights reserved.</p>
+        <p>Follow me on <a href="https://www.instagram.com/nr.aztie/profilecard/?igsh=MWU0MXRhaDJlNXRvZg==" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>
+    </footer>
+
+    <script>
+	
+	    // JavaScript for toggling the side navigation
+        function toggleMenu() {
+            const sideNav = document.getElementById("sideNav");
+            const burgerMenu = document.querySelector(".burger-menu");
+
+            if (sideNav.style.left === "0px") {
+                sideNav.style.left = "-250px";
+                burgerMenu.classList.remove("open");
+            } else {
+                sideNav.style.left = "0px";
+                burgerMenu.classList.add("open");
+            }
+        }
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
