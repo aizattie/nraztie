@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nraztie's Education</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: "Lucida Console", "Courier New", monospace;
+			background: url('image/image 19.gif') no-repeat center center/cover;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+         /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .logo:hover {
+            color: #E4A592;
+        }
+
+        /* Burger Menu */
+        .burger-menu {
+            display: block;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .burger-menu span {
+            background-color: #E4A592;
+            display: block;
+            height: 3px;
+            width: 25px;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu.open span:nth-child(1) {
+            transform: rotate(45deg) translateY(8px);
+        }
+
+        .burger-menu.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.open span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-8px);
+        }
+
+        /* Side Navigation */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            width: 250px;
+            background-color: #EFC6CD;
+            color: white;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .side-nav a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .side-nav a:hover {
+            background-color: #CBD6AB;
+        }
+		
+        /* Education Timeline Section */
+		.education-timeline {
+			background-color: #F4D7DB; /* Soft pink background */
+			padding: 50px 20px;
+			text-align: center;
+		}
+
+		.education-timeline h2 {
+			font-size: 2em;
+			font-weight: bold;
+			margin-bottom: 20px;
+			color: #333;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.education-timeline h2::before {
+			content: '🎓';
+			font-size: 1.5em;
+		}
+
+		.timeline {
+			position: relative;
+			margin: 0 auto;
+			max-width: 800px;
+		}
+
+		/* Vertical line */
+		.timeline::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			wid	th: 4px;
+			height: 100%;
+			background-color: #CBD6AB; /* Soft line color */
+			z-index: 0;
+		}
+
+		.timeline-item {
+			position: relative;
+			margin-bottom: 40px;
+			width: 100%;
+			z-index: 1;
+		}
+
+		/* Timeline marker */
+			.timeline-item::before {
+			content: '●';
+			position: absolute;
+			left: 50%;
+			top: 20px;
+			transform: translateX(-50%);
+			font-size: 1.5em;
+			color: #E4A592;
+			background-color: #CBD6AB; /* Matches the card */
+			border-radius: 50%;
+			z-index: 2;
+		}
+
+		.timeline-content {
+			background-color: #CBD6AB; /* Light card background */
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			text-align: left;
+			width: calc(50% - 50px);
+			position: relative;
+		}
+
+		.timeline-item:nth-child(even) .timeline-content {
+			left: 50%;
+		}
+
+		.timeline-item:nth-child(odd) .timeline-content {
+			left: 0;
+		}
+
+		/* Icons */
+		.timeline-content h3 {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin-top: 0;
+		}
+
+		.timeline-content h3::before {
+			font-size: 1.5em;
+		}
+
+		.timeline-item:nth-child(1) h3::before {
+			content: '🏫';
+		}
+
+		.timeline-item:nth-child(2) h3::before {
+			content: '🎓';
+		}
+
+		/* Responsive Design */
+		@media (max-width: 768px) {
+		.timeline::after {
+			left: 20px;
+		}
+
+		.timeline-content {
+			width: calc(100% - 70px);
+			left: 40px !important;
+		}
+
+		.timeline-item::before {
+			left: 20px;
+		}
+	}
+    
+	    /* Carousel Section */
+		.image-carousel {
+			text-align: center;
+			padding: 50px 20px;
+			background: url('image/image 19.gif') no-repeat center center/cover;
+		}
+
+		.image-carousel h2 {
+			font-size: 2em;
+			margin-bottom: 20px;
+		color: #333;
+		}
+
+		.carousel-container {
+			position: relative;
+			max-width: 500px;
+			margin: auto;
+			overflow: hidden;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.carousel {
+			display: flex;
+			transition: transform 0.5s ease-in-out;
+		}
+
+		.carousel img {
+			width: 100%;
+			flex-shrink: 0;
+			object-fit: cover;
+			border-radius: 10px;
+		}
+
+		/* Navigation Buttons */
+		.prev, .next {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		background-color: rgba(0, 0, 0, 0.5);
+		color: white;
+		border: none;
+		padding: 10px;
+		cursor: pointer;
+		border-radius: 50%;
+		font-size: 18px;
+		transition: background-color 0.3s;
+		}
+
+		.prev:hover, .next:hover {
+			background-color: rgba(0, 0, 0, 0.8);
+		}
+
+		.prev {
+			left: 10px;
+		}
+
+		.next {
+			right: 10px;
+		}
+
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #CBD6AB;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.5s ease, transform 0.3s ease;
+        }
+
+        #back-to-top.show {
+            display: block;
+            opacity: 1;
+        }
+
+        #back-to-top:hover {
+            transform: scale(1.2);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #CBD6AB;
+            color: black;
+            text-align: center;
+            padding: 10px 10px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #D0BCA1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header and Navbar -->
+    <header>
+        <div class="navbar">
+            <div class="logo">NRAZTIE</div>
+            <div class="burger-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Side Navigation -->
+    <div class="side-nav" id="sideNav">
+        <a href="index.html">Home</a>
+        <a href="biodata.html">Biodata</a>
+        <a href="experience.html">Experience</a>
+        <a href="education.html">Education</a>
+        <a href="family.html">Family</a>
+        <a href="gallery.html">Gallery</a>
+    </div>
+
+    <!-- Education Timeline Section -->
+    <section class="education-timeline">
+        <h2> My Education Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3> High School</h3>
+                    <p><strong>School Name:</strong> SMK Sultan Abu Bakar</p>
+                    <p><strong>Year:</strong> 2017 - 2021</p>
+                    <p> Science Stream </p>
+					<p> SPM: 5A,2B,2C </p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3> Diploma </h3>
+                    <p><strong>University Name:</strong> UiTM Kelantan, Machang Branch</p>
+                    <p><strong>Diploma:</strong> Diploma in Information Management</p>
+                    <p><strong>Year:</strong> 2022 - present</p>
+                    <p> Current CGPA: 3.76 <p>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- Image Carousel Section -->
+	<section class="image-carousel">
+		<h2>Memorable Moments</h2>
+		<div class="carousel-container">
+			<div class="carousel">
+				<img src="image/image 58.jpg" alt="Image 1">
+				<img src="image/image 61.jpg" alt="Image 2">
+				<img src="image/image 60.jpg" alt="Image 3">
+				<img src="image/image 59.jpg" alt="Image 4">
+        </div>
+        <!-- Navigation Arrows -->
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+</section>
+
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Go to top">⬆</button>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Aizattie's Website. All rights reserved.</p>
+        <p>Follow me on <a href="https://www.instagram.com/nr.aztie/profilecard/?igsh=MWU0MXRhaDJlNXRvZg==" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Toggle Side Navigation
+        function toggleMenu() {
+            const sideNav = document.getElementById("sideNav");
+            const burgerMenu = document.querySelector(".burger-menu");
+
+            if (sideNav.style.left === "0px") {
+                sideNav.style.left = "-250px";
+                burgerMenu.classList.remove("open");
+            } else {
+                sideNav.style.left = "0px";
+                burgerMenu.classList.add("open");
+            }
+        }
+        
+		// Carousel Functionality
+		let currentSlide = 0;
+		
+		function moveSlide(step) {
+			const carousel = document.querySelector('.carousel');
+			const slides = document.querySelectorAll('.carousel img');
+			const totalSlides = slides.length;
+
+			currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+
+			const offset = -currentSlide * 100;
+			carousel.style.transform = `translateX(${offset}%)`;
+		}
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
